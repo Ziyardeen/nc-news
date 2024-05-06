@@ -1,10 +1,17 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const ArticleCard = ({article}) => {
+  const navigate = useNavigate()
+
+  const handleClick = ()=>{
+    navigate(`/articles/${article.article_id}`)
+  }
+  
  
   return (
-    <>
-    <div className="article-card">
+
+    <div className="article-card" id={article.article_id} onClick={handleClick}>
         <h2 className="article-title">{article.title}</h2>
         <p className="article-meta">
             <span className="article-topic">{article.topic}</span> {article.author} {article.created_at}
@@ -16,7 +23,7 @@ const ArticleCard = ({article}) => {
             <span className="comments"> {article.comment_count} comments</span>
         </div>
      </div>
-    </>
+    
 
   )
 }
