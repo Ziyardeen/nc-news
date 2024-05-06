@@ -9,6 +9,7 @@ import Home from './Pages/Home'
 import Sticky from './components/Sticky'
 import Header from './components/Header'
 import Navbar from './components/Navbar'
+import ArticleView from './components/ArticleView'
 
 function App() {
 
@@ -22,6 +23,7 @@ function App() {
       <Routes>
         <Route path='/'element={<Home/>}/>
         <Route path='/articles'element={<Articles />}/>
+        <Route path='/articles/:article_id'element={<ArticleView />}/>
       </Routes>
     </>
   )

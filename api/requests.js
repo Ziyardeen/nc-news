@@ -27,3 +27,12 @@ export function fetchRandomArticles() {
       return random;
     });
 }
+
+export function fetchArticleById(article_id) {
+  return API.get(`/articles/${article_id}`).then(({ data }) => {
+    // console.log(data.article);
+    return data.article;
+  });
+}
+
+// fetchArticleById(2);
