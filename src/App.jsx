@@ -10,15 +10,17 @@ import Sticky from './components/Sticky'
 import Header from './components/Header'
 import Navbar from './components/Navbar'
 import ArticleView from './components/ArticleView'
+import CommentsList from './components/CommentsList'
 
 function App() {
 
   return (
     <>
     <Sticky>
-       <Header />
        <Navbar/>
     </Sticky>
+
+    {/* <CommentsList /> */}
 
       <Routes>
         <Route path='/'element={<Home/>}/>

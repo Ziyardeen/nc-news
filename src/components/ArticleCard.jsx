@@ -7,6 +7,8 @@ const ArticleCard = ({article}) => {
   const handleClick = ()=>{
     navigate(`/articles/${article.article_id}`)
   }
+
+  
   
  
   return (
@@ -23,8 +25,6 @@ const ArticleCard = ({article}) => {
             <span className="comments"> {article.comment_count} comments</span>
         </div>
      </div>
-    
-
   )
 }
 
