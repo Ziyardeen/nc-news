@@ -20,7 +20,7 @@ function App() {
        <Navbar/>
     </Sticky>
 
-    {/* <CommentsList /> */}
+  
 
       <Routes>
         <Route path='/'element={<Home/>}/>
