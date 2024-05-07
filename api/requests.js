@@ -35,4 +35,13 @@ export function fetchArticleById(article_id) {
   });
 }
 
+export function fetchCommentsByArticleId(article_id) {
+  return API.get(`/articles/${article_id}/comments`).then(({ data }) => {
+    console.log(data);
+    return data;
+  });
+}
+
+fetchCommentsByArticleId(2);
+
 // fetchArticleById(2);

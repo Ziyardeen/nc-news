@@ -1,12 +1,15 @@
  import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { fetchArticleById } from '../../api/requests'
+import CommentsList from './CommentsList'
  
  
  const ArticleView = () => {
    
     const {article_id} = useParams()
     const [article,setArticle] = useState({})
+    const [commentVisibility, setCommentVisibility] = useState(false)
+
     console.log(article_id)
 
     useEffect(() => {
@@ -15,6 +18,10 @@ import { fetchArticleById } from '../../api/requests'
           setArticle(article)
         })
     },[])
+
+    const handleComment = () => {
+      setCommentVisibility(!commentVisibility)
+    }
 
     console.log(article)
 
@@ -32,9 +39,10 @@ import { fetchArticleById } from '../../api/requests'
       <p className="article-body">{article.body}</p>
       <div className="article-footer">
         <span className="votes">{article.votes} Votes </span>
-        <span className="comments"> {article.comment_count} comments</span>
+        <span className="comments" onClick={handleComment} > {article.comment_count} comments</span>
       </div>
     </div>
+      {commentVisibility && <CommentsList /> }
     </>
    )
  }
