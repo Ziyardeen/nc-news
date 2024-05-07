@@ -9,13 +9,16 @@ import CommentsList from './CommentsList'
     const {article_id} = useParams()
     const [article,setArticle] = useState({})
     const [commentVisibility, setCommentVisibility] = useState(false)
+    const [isLoading, setIsLoading] = useState(false);
 
-    console.log(article_id)
+
 
     useEffect(() => {
+      setIsLoading(true)
         fetchArticleById(article_id).then((article) => {
             
           setArticle(article)
+          setIsLoading(false)
         })
     },[])
 
@@ -23,12 +26,13 @@ import CommentsList from './CommentsList'
       setCommentVisibility(!commentVisibility)
     }
 
-    console.log(article)
+ 
 
 
    return (
  
     <>
+    {isLoading ? <p>Loading......</p>: null}
     <div>ArticleView</div>
     <div className="article-details">
       <h2>{article.title}</h2>
@@ -42,7 +46,7 @@ import CommentsList from './CommentsList'
         <span className="comments" onClick={handleComment} > {article.comment_count} comments</span>
       </div>
     </div>
-      {commentVisibility && <CommentsList /> }
+      {commentVisibility && <CommentsList article_id={article_id}/> }
     </>
    )
  }

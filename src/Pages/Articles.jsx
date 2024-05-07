@@ -7,16 +7,20 @@ import Sticky from '../components/Sticky'
 
 const Articles = () => {
     const [articles,setArticles] = useState([])
+    const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
+      setIsLoading(true)
       fetchAllArticles().then((data) => {
         setArticles(data)
+        setIsLoading(false)
        
       })
     },[])
    
   return (
     <>
+    {isLoading ? <p>Loading......</p>: null}
      {articles.map((article)=>{
         return <ArticleCard key={article.article_id}article = {article}/>
      })}
