@@ -11,6 +11,7 @@ import Header from './components/Header'
 import Navbar from './components/Navbar'
 import ArticleView from './components/ArticleView'
 import CommentsList from './components/CommentsList'
+import VotesBtn from './components/VotesBtn'
 
 function App() {
 
@@ -19,7 +20,7 @@ function App() {
     <Sticky>
        <Navbar/>
     </Sticky>
-
+    {/* <VotesBtn/> */}
   
 
       <Routes>

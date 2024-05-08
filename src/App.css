@@ -4,6 +4,10 @@
   box-sizing: border-box;
 }
 
+img{
+  width: 100%;
+}
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
@@ -11,41 +15,6 @@
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
-}
 
 
 /* Styling Starts Here */
@@ -139,12 +108,24 @@ padding: 10px;
   box-shadow: 10px 10px 15px;
   padding: 20px;
   border-radius: 40px;
+
+}
+.comments{
+  font-size: 20px;
+  font-weight: 600;
+  opacity:0.6;
+}
+.comments:hover{
+ cursor: pointer;
+ transform:scale(1.1);
+ opacity:1;
 }
 
 
 
 /* NavBar Stylying */
 .navbar{
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -168,11 +149,10 @@ padding: 10px;
 
 .navbar .nav-links a{
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-  font-size: large;
+  font-size: 20px;
   font-weight: 900;
   width: 90px;
   color: rgb(5, 5, 5);
-  height: 30px;
   margin:0 30px;
 }
 
@@ -207,5 +187,49 @@ padding: 5px;
   position: sticky;
   top: 0px;
   background-color: #ffffff;
+}
+
+.vote-container .votes{
+  font-size: 20px;
+  font-weight: 600;
+}
+.vote-container button{
+ background-color: #666564;
+ margin-left: 20px;
+ padding: 5px 15px;
+ color: #10f4a4;
+}
+
+.active:disabled{
+  background-color: #16a8f6;
+}
+
+
+@media screen and (max-width:700px) {
+  .nav-container{
+    flex-direction: column;
+  }
+  .nav-container div{
+   
+    margin-top:10px;
+    margin-bottom:10px;
+  }
+  .user-info{
+    width:80px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .header-container h1{
+    font-size: 20px;
+  }
+  .search-bar > *{
+    font-size: 10px;
+  }
+  .navbar .nav-links a{
+    font-size: 10px;
+    justify-self:left;
+  }
+
 }
 

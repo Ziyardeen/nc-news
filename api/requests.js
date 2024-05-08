@@ -39,3 +39,14 @@ export function fetchCommentsByArticleId(article_id) {
     return data;
   });
 }
+
+export function updateVotesById(article_id, vote) {
+  return API.patch(`/articles/${article_id}`, { inc_votes: vote }).then(
+    ({ data }) => {
+      console.log(data);
+      return data;
+    }
+  );
+}
+
+// updateVotesById(1, 1);
