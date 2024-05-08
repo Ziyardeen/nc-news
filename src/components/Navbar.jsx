@@ -10,6 +10,7 @@ const Navbar = () => {
     <div className="header-container">
          <h1 className='header'>NC News App</h1>
     </div>
+    
 <div className='nav-container'>
 
     <div className="user-info">
