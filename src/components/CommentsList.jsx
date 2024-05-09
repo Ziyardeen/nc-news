@@ -3,6 +3,8 @@ import CommentCard from './CommentCard'
 import { fetchCommentsByArticleId } from '../../api/requests'
 import { postCommentsById } from '../../api/requests'
 
+import { deleteCommentById } from '../../api/requests'
+
 const CommentsList = ({article_id,article}) => {
    const [comments,setComments] = useState([])
    const [isLoading, setIsLoading] = useState(false);
@@ -12,6 +14,8 @@ const CommentsList = ({article_id,article}) => {
    const [commentError, setCommentError] = useState(null);
    const [isDisabled, setIsDisabled] = useState(false);
    const [isSuccess, setIsSuccess] = useState(false);
+
+   const userName = "grumpy19"
   
 
    useEffect(() => {
@@ -20,7 +24,7 @@ const CommentsList = ({article_id,article}) => {
        setComments(comments)
        setIsLoading(false)
      })
-   },[comment])
+   },[comment,comments])
   //  Post Comment
 
   const name = article.author;
@@ -58,10 +62,14 @@ const CommentsList = ({article_id,article}) => {
       })
 
   }
-  //Deleteing a Comment
-      // const handleDelete =  ()=>{
+  // Deleting a Comment
+  const handleDelete =  (commentId)=>{
+    setComments(comments.filter((comment) => comment.id !== commentId));
 
-      // }
+    deleteCommentById(commentId).then(() => {
+      console.log("Delete succesfull")
+    })
+  }
 
 
   return (
@@ -83,8 +91,8 @@ const CommentsList = ({article_id,article}) => {
       
       return(
       <div className='comments-list' key={comment.comment_id}>
-          <CommentCard comment= {comment} />
-          {/* <button className='delete-btn'>Delete</button> */}
+          <CommentCard comment= {comment} handleDelete={handleDelete}/>
+          {userName === comment.author && <button className='delete-btn' onClick={() => handleDelete(comment.comment_id)}>Delete</button>}
       </div> )
     })}
   

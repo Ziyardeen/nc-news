@@ -14,6 +14,9 @@ const CommentCard = ({comment}) => {
         <span>Votes: {comment.votes}</span>
         <span>Author: {comment.author}</span>
       </div>
+       {/* <button className='delete-btn' onClick={() => handleDelete(comment.comment_id)}>
+        Delete
+      </button> */}
      
     </div>
     </>
