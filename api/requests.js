@@ -54,7 +54,17 @@ export function postCommentsById(article_id, name, comment) {
     username: name,
     body: comment,
   }).then(({ data }) => {
-    console.log(data);
     return data;
   });
+}
+
+export function deleteCommentById(comment_id) {
+  return API.delete(`/comments/${comment_id}`)
+    .then(() => {
+      console.log("Post deleted successfully");
+      return;
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 }
