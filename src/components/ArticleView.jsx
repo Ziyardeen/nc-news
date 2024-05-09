@@ -108,7 +108,7 @@ import { updateVotesById } from '../../api/requests'
         <span className="comments" onClick={handleComment} > {article.comment_count} comments</span>
       </div>
     </div>
-      {commentVisibility && <CommentsList article_id={article_id}/> }
+      {commentVisibility && <CommentsList article_id={article_id} article={article}/> }
     </>
    )
  }

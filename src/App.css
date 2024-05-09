@@ -204,6 +204,21 @@ padding: 5px;
   background-color: #16a8f6;
 }
 
+/* Comment Form */
+.post-comment-container{
+  width: 100%;
+}
+.comment-form{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+}
+.comment-name > *{
+margin-left: 10px;
+}
+
+
 
 @media screen and (max-width:700px) {
   .nav-container{

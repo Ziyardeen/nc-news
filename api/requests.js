@@ -49,4 +49,12 @@ export function updateVotesById(article_id, vote) {
   );
 }
 
-// updateVotesById(1, 1);
+export function postCommentsById(article_id, name, comment) {
+  return API.post(`/articles/${article_id}/comments`, {
+    username: name,
+    body: comment,
+  }).then(({ data }) => {
+    console.log(data);
+    return data;
+  });
+}
