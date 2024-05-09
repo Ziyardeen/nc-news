@@ -1,7 +1,10 @@
 import React from 'react'
 
 
+
 const CommentCard = ({comment}) => {
+
+  
   return (
     <>
     <div>Comment</div>
@@ -11,6 +14,7 @@ const CommentCard = ({comment}) => {
         <span>Votes: {comment.votes}</span>
         <span>Author: {comment.author}</span>
       </div>
+     
     </div>
     </>
   )

@@ -1,17 +1,11 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
-import ArticleCard from './components/ArticleCard'
 import Articles from './Pages/Articles'
 import { Route,Routes } from 'react-router-dom'
 import Home from './Pages/Home'
 import Sticky from './components/Sticky'
-import Header from './components/Header'
 import Navbar from './components/Navbar'
 import ArticleView from './components/ArticleView'
-import CommentsList from './components/CommentsList'
-import VotesBtn from './components/VotesBtn'
+import PostComment from './components/PostComment'
 
 function App() {
 
@@ -20,7 +14,11 @@ function App() {
     <Sticky>
        <Navbar/>
     </Sticky>
-    {/* <VotesBtn/> */}
+
+    {/* <PostComment /> */}
+
+    
+
   
 
       <Routes>
