@@ -16,7 +16,8 @@ import { updateVotesById } from '../../api/requests'
     const [upVoted, setUpVoted] = useState(false)
     const [downVoted, setDownVoted] = useState(false)
     const [failure, setFailure] = useState(false)
-
+    const [upCounter,setUpCounter] = useState(0)
+    const [downCounter,setDownCounter] = useState(0)
 
 
     useEffect(() => {
@@ -33,11 +34,19 @@ import { updateVotesById } from '../../api/requests'
     }
 
 
-    ///////////////////////////////////
+ 
 
     const handleUpVote = ()=>{
+      if(upVoted && !downVoted && upCounter > 0 ){
+        console.log("Up voted already...")
+        return
+      }
       setUpVoted(true)
       setDownVoted(false)
+      setUpCounter((prev) => {
+        return prev + 1
+      })
+      setDownCounter(0)
       
         //  optimistically render upvote
       setArticle((prevArticle) => ({
@@ -49,27 +58,38 @@ import { updateVotesById } from '../../api/requests'
          console.log("patch successful......")
        }).catch(() => {
          setFailure(true)
-         console.log
+         setArticle((prevArticle) => ({
+          ...prevArticle,
+          votes: prevArticle.votes - 1,
+        }))
+        
        })
   
      }
 
      const handleDownVote = ()=>{
+      if(!upVoted && downVoted && downCounter > 0){
+        console.log("Down voted already...")
+        return
+      }
+
       setUpVoted(false)
       setDownVoted(true)
+      setDownCounter((prev) => {
+        return prev + 1
+      })
+      setUpCounter(0)
       //  optimistically render downvote
       setArticle((prevArticle) => ({
         ...prevArticle,
         votes: prevArticle.votes - 1,
       }))
 
-
       updateVotesById(article.article_id,-1).then((data) => {
 
         console.log("patch successful......")
       }).catch((err) => {
         setFailure(true)
-        // console.log(err)
         setArticle((prevArticle) => ({
           ...prevArticle,
           votes: prevArticle.votes + 1,
@@ -93,17 +113,18 @@ import { updateVotesById } from '../../api/requests'
       <p className="article-body">{article.body}</p>
       <div className="article-footer">
 
-        {/* <span className="votes">{article.votes} Votes </span> */}
+       
         <div className='vote-container'>
           <span className="votes">{article.votes} Votes </span>
           <button className={`vote-up-btn ${upVoted ? 'active' : ''}`} 
-          disabled={upVoted ? true : false} onClick={handleUpVote}>⬆️</button>
+          
+           onClick={handleUpVote}>⬆️</button>
           <button className={`vote-down-btn ${downVoted ? 'active' : ''}`} 
-          disabled={downVoted ? true : false}
+         
           onClick={handleDownVote}>⬇️</button>
           {failure && <p>Vote Failed</p>}
        </div>
-          {/* <VotesBtn article_id={article_id} currentArticle={article}/> */}
+      
         
         <span className="comments" onClick={handleComment} > {article.comment_count} comments</span>
       </div>
