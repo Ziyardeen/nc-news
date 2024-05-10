@@ -68,3 +68,11 @@ export function deleteCommentById(comment_id) {
       console.log(err);
     });
 }
+
+export function fetchUserNames() {
+  return API.get("/users").then(({ data }) => {
+    return data;
+  });
+}
+
+// fetchUserNames();
