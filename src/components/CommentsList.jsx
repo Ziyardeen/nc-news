@@ -5,7 +5,7 @@ import { postCommentsById } from '../../api/requests'
 
 import { deleteCommentById } from '../../api/requests'
 
-const CommentsList = ({article_id,article}) => {
+const CommentsList = ({article_id,article,selectedUsername}) => {
    const [comments,setComments] = useState([])
    const [isLoading, setIsLoading] = useState(false);
    const [isSubmit, setIsSubmit] = useState(false);
@@ -15,7 +15,8 @@ const CommentsList = ({article_id,article}) => {
    const [isDisabled, setIsDisabled] = useState(false);
    const [isSuccess, setIsSuccess] = useState(false);
 
-   const userName = "grumpy19"
+
+   const userName = selectedUsername;
   
 
    useEffect(() => {
@@ -24,10 +25,8 @@ const CommentsList = ({article_id,article}) => {
        setIsLoading(false)
      })
    },[comment])
+
   //  Post Comment
-
-  const name = article.author;
-
    const handleCommentInput= ({target})=>{
     setComment(target.value)
     }
@@ -39,19 +38,20 @@ const CommentsList = ({article_id,article}) => {
 
       if(!comment){
           console.log("Enter post")
-          setCommentError("Please Enter Your Comment")
+          setCommentError("Please Enter Your Comment or Select your username")
           setIsSubmit(false)
           setIsDisabled(false)
           return
       }
-      // optimistically render Here
-      postCommentsById(article_id,name,comment).then((data) => {
+    
+      postCommentsById(article_id,userName,comment).then((data) => {
           setComment('')
           setIsSubmit(false)
           setCommentError("")
           setIsSuccess(true)
           setIsLoading(true)
           setComments((prevComments) => {
+            console.log(prevComments)
            return [...prevComments,data]
           })
        
@@ -64,11 +64,13 @@ const CommentsList = ({article_id,article}) => {
   }
   // Deleting a Comment
   const handleDelete =  (commentId)=>{
-    setComments(comments.filter((comment) => comment.id !== commentId));
-
-    deleteCommentById(commentId).then(() => {
-      console.log("Delete succesfull")
+    setComments((prevComments) => {
+      
+      return  prevComments.filter((comment) => comment.comment_id !== commentId)
     })
+      
+
+    deleteCommentById(commentId).then(() => {})
   }
 
 
@@ -91,7 +93,7 @@ const CommentsList = ({article_id,article}) => {
       
       return(
       <div className='comments-list' key={comment.comment_id}>
-          <CommentCard comment= {comment} handleDelete={handleDelete}/>
+          <CommentCard comment= {comment} />
           {userName === comment.author && <button className='delete-btn' onClick={() => handleDelete(comment.comment_id)}>Delete</button>}
       </div> )
     })}
