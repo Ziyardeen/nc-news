@@ -85,7 +85,6 @@ const CommentsList = ({article_id,article}) => {
     </form>
     
     </div>
-    {console.log(isLoading,"<<<<<")}
 
     {isLoading ? <p>Loading......</p>: null }
     {comments.map((comment) => {
