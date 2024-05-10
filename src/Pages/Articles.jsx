@@ -1,22 +1,23 @@
 import React, { useEffect, useState } from 'react'
 import { fetchAllArticles } from '../../api/requests'
 import ArticleCard from '../components/ArticleCard'
-import Header from '../components/Header'
-import Navbar from '../components/Navbar'
-import Sticky from '../components/Sticky'
+import { useSearchParams } from 'react-router-dom'
 
 const Articles = () => {
     const [articles,setArticles] = useState([])
     const [isLoading, setIsLoading] = useState(false);
+    const [searchParams, setSearchParams] = useSearchParams()
+    const selectedTopic = searchParams.get('topic')
+    
 
     useEffect(() => {
       setIsLoading(true)
-      fetchAllArticles().then((data) => {
+      fetchAllArticles(selectedTopic).then((data) => {
         setArticles(data)
         setIsLoading(false)
        
       })
-    },[])
+    },[selectedTopic])
    
   return (
     <>

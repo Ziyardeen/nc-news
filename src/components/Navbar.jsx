@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { NavLink, Link } from 'react-router-dom'
-import { fetchUserNames } from '../../api/requests'
+import { fetchTopics, fetchUserNames } from '../../api/requests'
 
 
 
 const Navbar = ({selectedUsername, setSelectedUsername}) => {
     const [users, setUsers] = useState([]) 
+    const [topics, setTopics] = useState([]) 
+    const [selectedTopic, setSelectedTopic] = useState('')
 
     useEffect(() => { 
         fetchUserNames().then(users => setUsers(users))
@@ -18,6 +20,20 @@ const Navbar = ({selectedUsername, setSelectedUsername}) => {
     const user = users.filter((user) => {
       return user.username === selectedUsername;
     })
+
+    useEffect(() => {
+      fetchTopics().then((data) => {
+        
+        const topics = data.map((obj) => {
+          return obj.slug
+        })
+        setTopics(topics)
+        return topics
+      })
+    },[])
+
+    
+   
 
 
   return (
@@ -42,6 +58,12 @@ const Navbar = ({selectedUsername, setSelectedUsername}) => {
     <div className='nav-links'>
         <NavLink to="/">Home</NavLink>
         <NavLink to="/articles">Articles</NavLink>
+    </div>
+
+    <div className='topics'>
+        {topics.map((topic) => {
+            return <NavLink key ={topic} to={`/articles?topic=${topic}`}> {topic} </NavLink>
+        })}
     </div>
 
     <form className="search-bar">

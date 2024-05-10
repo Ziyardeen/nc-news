@@ -7,6 +7,7 @@ import Navbar from './components/Navbar'
 import ArticleView from './components/ArticleView'
 import { useState } from 'react'
 import PostComment from './components/PostComment'
+import Topics from './Pages/Topics'
 
 function App() {
   const [selectedUsername, setSelectedUsername] = useState('SELECT USER HERE')
@@ -24,6 +25,7 @@ function App() {
         <Route path='/'element={<Home/>}/>
         <Route path='/articles'element={<Articles />}/>
         <Route path='/articles/:article_id'element={<ArticleView selectedUsername={selectedUsername}/>}/>
+        <Route path='/topics'element={<Topics />}/>
       </Routes>
     </>
   )

@@ -4,7 +4,12 @@ const API = axios.create({
   baseURL: "https://ziyardeen-nc-news-be-project.onrender.com/api",
 });
 
-export function fetchAllArticles() {
+export function fetchAllArticles(topic) {
+  if (topic) {
+    return API.get(`articles/?topic=${topic}`).then(({ data }) => {
+      return data;
+    });
+  }
   return API.get("/articles").then(({ data }) => {
     return data;
   });
@@ -43,7 +48,6 @@ export function fetchCommentsByArticleId(article_id) {
 export function updateVotesById(article_id, vote) {
   return API.patch(`/articles/${article_id}`, { inc_votes: vote }).then(
     ({ data }) => {
-      console.log(data);
       return data;
     }
   );
@@ -75,4 +79,8 @@ export function fetchUserNames() {
   });
 }
 
-// fetchUserNames();
+export function fetchTopics() {
+  return API.get("/topics").then(({ data }) => {
+    return data;
+  });
+}
