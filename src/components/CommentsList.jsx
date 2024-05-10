@@ -19,12 +19,11 @@ const CommentsList = ({article_id,article}) => {
   
 
    useEffect(() => {
-    setIsLoading(true)
      fetchCommentsByArticleId(article_id).then((comments) => {
        setComments(comments)
        setIsLoading(false)
      })
-   },[comment,comments])
+   },[comment])
   //  Post Comment
 
   const name = article.author;
@@ -51,6 +50,7 @@ const CommentsList = ({article_id,article}) => {
           setIsSubmit(false)
           setCommentError("")
           setIsSuccess(true)
+          setIsLoading(true)
           setComments((prevComments) => {
            return [...prevComments,data]
           })
@@ -78,15 +78,16 @@ const CommentsList = ({article_id,article}) => {
     <div className='post-comment-container'>
     <div>PostComment</div>
     <form className='comment-form' onSubmit={handleSubmit}>
-        <textarea name="comment-body" id="comment-body" cols="30" rows="5" value={comment}onChange={handleCommentInput} disabled={isDisabled}></textarea>
+        <textarea name="comment-body" id="comment-body" cols="30" rows="5" value={comment}onChange={handleCommentInput} disabled={isSuccess}></textarea>
         {commentError && <p className="error-message">{commentError}</p>}
         {isSuccess && <p className="success-message">Your Comment was successful</p>}
-        <button type="submit">{isSubmit ? "Posting..." : "Post Comment"}</button>
+        <button type="submit" disabled={isSuccess}>{isSubmit ? "Posting..." : "Post Comment"}</button>
     </form>
     
     </div>
+    {console.log(isLoading,"<<<<<")}
 
-    {isLoading ?<p>Loading......</p>: null }
+    {isLoading ? <p>Loading......</p>: null }
     {comments.map((comment) => {
       
       return(
