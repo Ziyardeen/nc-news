@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { NavLink, Link } from 'react-router-dom'
+import { NavLink, Link, useNavigate } from 'react-router-dom'
 import { fetchTopics, fetchUserNames } from '../../api/requests'
 
 
@@ -7,7 +7,9 @@ import { fetchTopics, fetchUserNames } from '../../api/requests'
 const Navbar = ({selectedUsername, setSelectedUsername}) => {
     const [users, setUsers] = useState([]) 
     const [topics, setTopics] = useState([]) 
-    const [selectedTopic, setSelectedTopic] = useState('')
+    const [selectedSort, setSelectedSort] = useState('created_at')
+    const [selectedOrder, setSelectedOrder] = useState('asc')
+    const navigate = useNavigate();
 
     useEffect(() => { 
         fetchUserNames().then(users => setUsers(users))
@@ -32,6 +34,21 @@ const Navbar = ({selectedUsername, setSelectedUsername}) => {
       })
     },[])
 
+    // Sorting
+    const handleSort = (event)=>{
+        setSelectedSort(event.target.value)
+    }
+    const handleOrder = (event)=>{
+        setSelectedOrder(event.target.value)
+    }
+    console.log(selectedOrder,selectedSort)
+
+    const handleClick = (e)=>{
+        e.preventDefault()
+        navigate(`/articles?sort_by=${selectedSort}&order=${selectedOrder}`)
+    }
+
+    console.log(selectedOrder,selectedSort)
     
    
 
@@ -67,8 +84,29 @@ const Navbar = ({selectedUsername, setSelectedUsername}) => {
     </div>
 
     <form className="search-bar">
-        <input type="text" name="search" placeholder="Search..."/>
-        <button type="submit">Search</button>
+        <div>
+            <label htmlFor="sort-order" >Sort Order:</label>
+            <select id="sort-order" onChange={handleOrder}>
+                <option value="asc">Ascending</option>
+                <option value="desc">Descending</option>
+            </select>
+        </div>
+
+        <div>
+        <label htmlFor="sort-by">Sort By:</label>
+            <select id="sort-by" onChange={handleSort}>
+                {/* <option value="votes">Vote</option> */}
+                <option value="created_at">Date</option>
+                {/* <option value="comment_count">Comment</option> */}
+            </select>
+        </div>
+        <div>
+            <button className='Sort' onClick={handleClick}>Sort</button>
+        </div>
+
+        {/* <input type="text" name="search" placeholder="Sort..."/>
+        <input type="text" name="search" placeholder="Order..."/>
+        <button type="submit">Search</button> */}
     </form>
    </div>
 </div>
