@@ -6,7 +6,7 @@ import Sticky from './components/Sticky'
 import Navbar from './components/Navbar'
 import ArticleView from './components/ArticleView'
 import { useState } from 'react'
-import PostComment from './components/PostComment'
+import NotFound from './Pages/NotFound'
 import Topics from './Pages/Topics'
 
 function App() {
@@ -26,6 +26,7 @@ function App() {
         <Route path='/articles'element={<Articles />}/>
         <Route path='/articles/:article_id'element={<ArticleView selectedUsername={selectedUsername}/>}/>
         <Route path='/topics'element={<Topics />}/>
+        <Route path='*'element={<NotFound />}/>
       </Routes>
     </>
   )

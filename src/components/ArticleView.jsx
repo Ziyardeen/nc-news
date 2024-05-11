@@ -16,6 +16,7 @@ import { updateVotesById } from '../../api/requests'
     const [upVoted, setUpVoted] = useState(false)
     const [downVoted, setDownVoted] = useState(false)
     const [failure, setFailure] = useState(false)
+    const [errorMesage,setErrorMessage] = useState("")
 
 
 
@@ -75,20 +76,26 @@ import { updateVotesById } from '../../api/requests'
   
     }
 
+    if(errorMesage){
+      return <div className='error-message'>{errorMesage}</div>
+    }
+
  
    return (
  
-    <>
+    <div className='article-view'>
     {isLoading ? <p>Loading......</p>: null}
     <div>ArticleView</div>
-    <div className="article-details">
-      <h2>{article.title}</h2>
-      <p className="article-meta">
-        <span className="article-topic">{article.topic}</span> by {article.author} on {article.created_at}
+    <div className="article-view-details">
+      <h2>{article.topic}: {article.title}</h2>
+      <p className="article-view-meta">
+        <span className="article-view-author">by {article.author} </span>
+
+        <span className="article-view-date"> on  {article.created_at}</span> 
       </p>
-      <img src={article.article_img_url} alt="Article Image" />
-      <p className="article-body">{article.body}</p>
-      <div className="article-footer">
+      <img className="article-view-image"src={article.article_img_url} alt="Article Image" />
+      <p className="article-view-body">{article.body}</p>
+      <div className="article-view-footer">
 
         
         <div className='vote-container'>
@@ -106,7 +113,7 @@ import { updateVotesById } from '../../api/requests'
       </div>
     </div>
       {commentVisibility && <CommentsList article_id={article_id} article={article} selectedUsername={selectedUsername}/> }
-    </>
+    </div>
    )
  }
  

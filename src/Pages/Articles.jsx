@@ -11,8 +11,8 @@ const Articles = () => {
 
     const selectedOrder = searchParams.get("order")
     const selectedSort  = searchParams.get("sort_by")
+    // const [errorMesage,setErrorMessage] = useState("")
 
-    console.log(selectedOrder,selectedSort,"<<<")
     
 
     useEffect(() => {
@@ -21,8 +21,15 @@ const Articles = () => {
         setArticles(data)
         setIsLoading(false)
        
-      })
+      }).catch((error) => {
+       
+        setErrorMessage(error.msg)
+      });
     },[selectedTopic,selectedOrder,selectedSort])
+
+    // if(errorMesage){
+    //   return <div className='error-message'>{errorMesage}</div>
+    // }
    
   return (
     <>
