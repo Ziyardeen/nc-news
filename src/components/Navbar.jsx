@@ -41,14 +41,14 @@ const Navbar = ({selectedUsername, setSelectedUsername}) => {
     const handleOrder = (event)=>{
         setSelectedOrder(event.target.value)
     }
-    console.log(selectedOrder,selectedSort)
+
 
     const handleClick = (e)=>{
         e.preventDefault()
         navigate(`/articles?sort_by=${selectedSort}&order=${selectedOrder}`)
     }
 
-    console.log(selectedOrder,selectedSort)
+
     
    
 
@@ -63,7 +63,7 @@ const Navbar = ({selectedUsername, setSelectedUsername}) => {
 <div className='nav-container'>
 
     <div className="user-info">
-        <img src={user.length === 0 ? "https://images.freeimages.com/fic/images/icons/2787/beautiful_flat_icons/128/rocket.png?fmt=webp&h=350" : user[0].avatar_url} alt="User Image"/>
+        <img className='user-image' src={user.length === 0 ? "https://images.freeimages.com/fic/images/icons/2787/beautiful_flat_icons/128/rocket.png?fmt=webp&h=350" : user[0].avatar_url} alt="User Image"/>
         <select value={selectedUsername} onChange={handleChange}>
         <option></option>
             {users.map(user => {
@@ -83,17 +83,17 @@ const Navbar = ({selectedUsername, setSelectedUsername}) => {
         })}
     </div>
 
-    <form className="search-bar">
-        <div>
-            <label htmlFor="sort-order" >Sort Order:</label>
+    <form className='sort-form'>
+        <div className='sort-container' >
+            <label htmlFor="sort-order" className='sort-labels' >Sort Order:</label>
             <select id="sort-order" onChange={handleOrder}>
                 <option value="asc">Ascending</option>
                 <option value="desc">Descending</option>
             </select>
         </div>
 
-        <div>
-        <label htmlFor="sort-by">Sort By:</label>
+        <div className='sort-container'>
+            <label htmlFor="sort-by" className='sort-labels'>Sort By:</label>
             <select id="sort-by" onChange={handleSort}>
                 {/* <option value="votes">Vote</option> */}
                 <option value="created_at">Date</option>
@@ -101,12 +101,9 @@ const Navbar = ({selectedUsername, setSelectedUsername}) => {
             </select>
         </div>
         <div>
-            <button className='Sort' onClick={handleClick}>Sort</button>
+            <button className='sort-button' onClick={handleClick}>Sort</button>
         </div>
 
-        {/* <input type="text" name="search" placeholder="Sort..."/>
-        <input type="text" name="search" placeholder="Order..."/>
-        <button type="submit">Search</button> */}
     </form>
    </div>
 </div>

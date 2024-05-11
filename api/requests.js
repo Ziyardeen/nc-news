@@ -6,21 +6,25 @@ const API = axios.create({
 
 export function fetchAllArticles(topic, selectedOrder, selectedSort) {
   if (topic) {
-    return API.get(`articles/?topic=${topic}`).then(({ data }) => {
-      return data;
-    });
+    return API.get(`articles/?topic=${topic}`)
+      .then(({ data }) => {
+        return data;
+      })
+      .catch((err) => {
+        return err;
+      });
   } else if (selectedOrder && selectedSort) {
-    return API.get(
-      `/articles?sort_by=${selectedSort}&order=${selectedOrder}`
-    ).then(({ data }) => {
-      console.log(data);
-      return data;
-    });
+    return API.get(`/articles?sort_by=${selectedSort}&order=${selectedOrder}`)
+      .then(({ data }) => {
+        return data;
+      })
+      .catch((err) => err);
   } else {
-    return API.get(`/articles`).then(({ data }) => {
-      console.log(data);
-      return data;
-    });
+    return API.get(`/articles`)
+      .then(({ data }) => {
+        return data;
+      })
+      .catch((err) => err);
   }
 }
 
@@ -74,12 +78,9 @@ export function postCommentsById(article_id, name, comment) {
 export function deleteCommentById(comment_id) {
   return API.delete(`/comments/${comment_id}`)
     .then(() => {
-      console.log("Post deleted successfully");
       return;
     })
-    .catch((err) => {
-      console.log(err);
-    });
+    .catch((err) => {});
 }
 
 export function fetchUserNames() {
