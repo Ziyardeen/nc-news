@@ -7,7 +7,6 @@ const CommentCard = ({comment}) => {
   
   return (
     <>
-    <div>Comment</div>
     <div className="comment">
       <p className="comment-body">{comment.body}</p>
       <div className="comment-info">

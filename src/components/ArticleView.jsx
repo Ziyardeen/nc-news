@@ -85,7 +85,6 @@ import { updateVotesById } from '../../api/requests'
  
     <div className='article-view'>
     {isLoading ? <p>Loading......</p>: null}
-    <div>ArticleView</div>
     <div className="article-view-details">
       <h2>{article.topic}: {article.title}</h2>
       <p className="article-view-meta">
